@@ -16,6 +16,9 @@ export const ingredientColors: Record<string, string> = {
 
   // caramel brown
   caramel: "#a67c52",
+
+  // ice cream white
+  "ice cream": "#f9f7f0",
 };
 
 // recipies without color
@@ -62,6 +65,28 @@ export const recipes = [
     ingredients: [
       { name: "Milk", parts: 2 },
       { name: "Espresso", parts: 2 },
+    ],
+  },
+  {
+    name: "Caramel Macchiato",
+    ingredients: [
+      { name: "Caramel", parts: 1 },
+      { name: "Espresso", parts: 1 },
+      { name: "Milk", parts: 1 },
+    ],
+  },
+  {
+    name: "Cortado",
+    ingredients: [
+      { name: "Milk Foam", parts: 1 },
+      { name: "Espresso", parts: 2 },
+    ],
+  },
+  {
+    name: "Affogato",
+    ingredients: [
+      { name: "Espresso", parts: 1 },
+      { name: "Ice Cream", parts: 1 },
     ],
   },
 ];
