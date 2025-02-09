@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ingredientColors } from "@/lib/recipes";
+import IngredientsSvg from "./ingredients-svg";
 
 type Ingredient = {
   name: string;
@@ -39,11 +40,13 @@ export default function CoffeeRecipeCard({
   }
 
   // Glass dimensions
-  const glassHeight = 240;
-  const glassBottomWidth = 80;
-  const glassTopWidth = 120;
-  const glassCenterX = 100;
-  const glassBottom = 280;
+  const glass = {
+    height: 240,
+    bottomWidth: 80,
+    topWidth: 120,
+    centerX: 100,
+    bottom: 280,
+  };
 
   const ingredientsWithColors = ingredients.map((ingredient) => ({
     ...ingredient,
@@ -94,77 +97,42 @@ export default function CoffeeRecipeCard({
             <defs>
               <clipPath id="glassShape">
                 <path
-                  d={`M${glassCenterX - glassTopWidth / 2} ${glassBottom - glassHeight}
-       L${glassCenterX + glassTopWidth / 2} ${glassBottom - glassHeight}
-       L${glassCenterX + glassBottomWidth / 2} ${glassBottom}
-       L${glassCenterX - glassBottomWidth / 2} ${glassBottom}
+                  d={`M${glass.centerX - glass.topWidth / 2} ${glass.bottom - glass.height}
+       L${glass.centerX + glass.topWidth / 2} ${glass.bottom - glass.height}
+       L${glass.centerX + glass.bottomWidth / 2} ${glass.bottom}
+       L${glass.centerX - glass.bottomWidth / 2} ${glass.bottom}
        Z`}
                   stroke="none" // Prevents unwanted strokes
                 />
               </clipPath>
               {/* <clipPath id="glassShape"> */}
               {/*   <path */}
-              {/*     d={`M${glassCenterX - glassTopWidth / 2} ${glassBottom - glassHeight} */}
-              {/*        L${glassCenterX + glassTopWidth / 2} ${glassBottom - glassHeight} */}
-              {/*        L${glassCenterX + glassBottomWidth / 2} ${glassBottom} */}
-              {/*        L${glassCenterX - glassBottomWidth / 2} ${glassBottom} */}
+              {/*     d={`M${glass.centerX - glass.topWidth / 2} ${glass.bottom - glass.height} */}
+              {/*        L${glass.centerX + glass.topWidth / 2} ${glass.bottom - glass.height} */}
+              {/*        L${glass.centerX + glass.bottomWidth / 2} ${glass.bottom} */}
+              {/*        L${glass.centerX - glass.bottomWidth / 2} ${glass.bottom} */}
               {/*        Z`} */}
               {/*   /> */}
               {/* </clipPath> */}
             </defs>
             {/* Glass Outline Without Top */}
             <path
-              d={`M${glassCenterX - glassTopWidth / 2} ${glassBottom - glassHeight}
-      L${glassCenterX - glassBottomWidth / 2} ${glassBottom}
-      L${glassCenterX + glassBottomWidth / 2} ${glassBottom}
-      L${glassCenterX + glassTopWidth / 2} ${glassBottom - glassHeight}`}
+              d={`M${glass.centerX - glass.topWidth / 2} ${glass.bottom - glass.height}
+      L${glass.centerX - glass.bottomWidth / 2} ${glass.bottom}
+      L${glass.centerX + glass.bottomWidth / 2} ${glass.bottom}
+      L${glass.centerX + glass.topWidth / 2} ${glass.bottom - glass.height}`}
               fill="none"
               stroke="#cccccc"
-              strokeWidth="4"
+              strokeWidth="6"
             />
 
             {/* Ingredients */}
-            <g clipPath="url(#glassShape)">
-              {
-                ingredients.reduce(
-                  (acc, ingredient, index) => {
-                    const previousHeight = acc.height;
-                    const height =
-                      (ingredient.parts / totalParts) * glassHeight;
-                    acc.height += height;
-                    const topWidth =
-                      glassBottomWidth +
-                      (glassTopWidth - glassBottomWidth) *
-                        (acc.height / glassHeight);
-                    const previousTopWidth =
-                      glassBottomWidth +
-                      (glassTopWidth - glassBottomWidth) *
-                        (previousHeight / glassHeight);
-
-                    return {
-                      height: acc.height,
-                      element: (
-                        <>
-                          {acc.element}
-                          <path
-                            key={index}
-                            d={`M${glassCenterX - previousTopWidth / 2} ${glassBottom - previousHeight}
-                              L${glassCenterX - topWidth / 2} ${glassBottom - acc.height}
-                              L${glassCenterX + topWidth / 2} ${glassBottom - acc.height}
-                              L${glassCenterX + previousTopWidth / 2} ${glassBottom - previousHeight}
-                              Z`}
-                            fill={
-                              ingredientColors[ingredient.name.toLowerCase()]
-                            }
-                          />
-                        </>
-                      ),
-                    };
-                  },
-                  { height: 0, element: <></> },
-                ).element
-              }
-            </g>
+            <IngredientsSvg
+              ingredients={ingredientsWithColors}
+              separateIngredients={true}
+              totalParts={totalParts}
+              glass={glass}
+            />
           </svg>
         </div>
       </CardContent>
