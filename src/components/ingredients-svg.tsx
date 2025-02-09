@@ -23,19 +23,27 @@ export default function IngredientsSvg({
     return null;
   }
 
-  const ingredientsWithColors = ingredients.map((ingredient) => ({
-    ...ingredient,
-    color: ingredientColors[ingredient.name.toLowerCase()],
-  }));
+  const ingredientsWithColors = ingredients
+    .map((ingredient) => ({
+      ...ingredient,
+      color: ingredientColors[ingredient.name.toLowerCase()],
+    }))
+    .reverse();
+
+  const padding = 10; // Adjust this value to increase/decrease separation
 
   return (
-    <g clipPath="url(#glassShape)">
+    <g
+      clipPath="url(#glassShape)"
+      transform="scale(0.80, 0.90) translate(25, 25)"
+    >
       {
         ingredientsWithColors.reduce(
           (acc, ingredient, index) => {
             const previousHeight = acc.height;
-            const height = (ingredient.parts / totalParts) * glass.height;
-            acc.height += height;
+            const height =
+              (ingredient.parts / totalParts) * glass.height - padding; // Apply padding
+            acc.height += height + padding; // Add padding between layers
 
             const topWidth =
               glass.bottomWidth +
@@ -56,22 +64,22 @@ export default function IngredientsSvg({
                   {separateIngredients && index > 0 && (
                     <line
                       x1={glass.centerX - topWidth / 2}
-                      y1={glass.bottom - previousHeight}
+                      y1={glass.bottom - previousHeight - padding / 2} // Adjust for padding
                       x2={glass.centerX + topWidth / 2}
-                      y2={glass.bottom - previousHeight}
-                      stroke="rgba(0, 0, 0, 0.3)" // Light gray/black line
-                      strokeWidth="2"
+                      y2={glass.bottom - previousHeight - padding / 2} // Adjust for padding
+                      stroke="rgba(0, 0, 0, 0.3)"
+                      strokeWidth="4"
                     />
                   )}
 
                   {/* Ingredient Layer */}
                   <path
                     key={index}
-                    d={`M${glass.centerX - previousTopWidth / 2} ${glass.bottom - previousHeight}
-                  L${glass.centerX - topWidth / 2} ${glass.bottom - acc.height}
-                  L${glass.centerX + topWidth / 2} ${glass.bottom - acc.height}
-                  L${glass.centerX + previousTopWidth / 2} ${glass.bottom - previousHeight}
-                  Z`}
+                    d={`M${glass.centerX - previousTopWidth / 2} ${glass.bottom - previousHeight - padding}
+              L${glass.centerX - topWidth / 2} ${glass.bottom - acc.height}
+              L${glass.centerX + topWidth / 2} ${glass.bottom - acc.height}
+              L${glass.centerX + previousTopWidth / 2} ${glass.bottom - previousHeight - padding}
+              Z`}
                     fill={ingredient.color}
                   />
                 </>

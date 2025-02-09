@@ -11,8 +11,8 @@ export const ingredientColors: Record<string, string> = {
   // milk foam white
   "milk foam": "#f9f7f0",
 
-  // water very pale blue
-  water: "#d4e9f2",
+  // water grey
+  water: "#d1d5db",
 
   // caramel brown
   caramel: "#a67c52",
@@ -24,22 +24,22 @@ export const recipes = [
     name: "Americano",
     ingredients: [
       { name: "Espresso", parts: 1 },
-      { name: "Water", parts: 1 },
+      { name: "Water", parts: 4 },
     ],
   },
   {
     name: "Cappuccino",
     ingredients: [
-      { name: "Espresso", parts: 1 },
-      { name: "Milk", parts: 1 },
       { name: "Milk Foam", parts: 1 },
+      { name: "Milk", parts: 1 },
+      { name: "Espresso", parts: 1 },
     ],
   },
   {
     name: "Latte",
     ingredients: [
-      { name: "Espresso", parts: 1 },
       { name: "Milk", parts: 2 },
+      { name: "Espresso", parts: 1 },
     ],
   },
   {
@@ -54,14 +54,14 @@ export const recipes = [
     name: "Macchiato",
     ingredients: [
       { name: "Espresso", parts: 1 },
-      { name: "Milk Foam", parts: 1 },
+      { name: "Milk Foam", parts: 2 },
     ],
   },
   {
     name: "Flat White",
     ingredients: [
-      { name: "Espresso", parts: 1 },
       { name: "Milk", parts: 2 },
+      { name: "Espresso", parts: 2 },
     ],
   },
 ];
