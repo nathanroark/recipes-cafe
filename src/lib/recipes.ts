@@ -71,8 +71,8 @@ export const recipes = [
     name: "Caramel Macchiato",
     ingredients: [
       { name: "Caramel", parts: 1 },
-      { name: "Espresso", parts: 1 },
-      { name: "Milk", parts: 1 },
+      { name: "Espresso", parts: 2 },
+      { name: "Milk", parts: 3 },
     ],
   },
   {
