@@ -48,8 +48,8 @@ export const recipes = [
   {
     name: "Mocha",
     ingredients: [
-      { name: "Espresso", parts: 1 },
-      { name: "Milk", parts: 1 },
+      { name: "Milk", parts: 3 },
+      { name: "Espresso", parts: 2 },
       { name: "Chocolate", parts: 1 },
     ],
   },
